@@ -11,6 +11,7 @@ namespace Selector
     /// </summary>
     public partial class MainWindow : Window
     {
+
         static string filePath = Directory.GetCurrentDirectory() + "\\Studenten.txt";
 
         List<Student> students = new List<Student>();
@@ -23,6 +24,7 @@ namespace Selector
             InitializeComponent();
             BindStudentList();
         }
+
 
         private void BindStudentList()
         {
@@ -45,7 +47,7 @@ namespace Selector
             }
         }
 
-        private void StudentItemsAdd()
+        private void FillStudentsList()
         {
             lstAllStudents.Items.Clear();
             foreach (Student student in students)
@@ -54,7 +56,7 @@ namespace Selector
             }
         }
 
-        private void GroupsItemsAdd()
+        private void FillGroupList()
         {
             lstGroup.Items.Clear();
             foreach (var student in group)
@@ -64,12 +66,14 @@ namespace Selector
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+
             FirstMethod();
             SecondMethod();
-            StudentItemsAdd();
+            FillStudentsList();
             group.Clear();
+
         }
-   
+
         private void FirstMethod()
         {
             var rnd = new Random();
@@ -84,8 +88,8 @@ namespace Selector
                     group.Add(newGroup);
                     students.RemoveAt(index);
 
-                    StudentItemsAdd();
-                    GroupsItemsAdd();
+                    FillStudentsList();
+                    FillGroupList();
                     return;
                 }
                 else
@@ -97,7 +101,7 @@ namespace Selector
             var rnd = new Random();
             var index = 0;
             int i = 0;
-            while (i < int.Parse(txtCount.Text)-1)
+            while (i < int.Parse(txtCount.Text) - 1)
             {
                 index = rnd.Next(0, students.Count);
                 if (students[index].Level > 1)
@@ -107,10 +111,9 @@ namespace Selector
                     group.Add(newGroup);
                     students.RemoveAt(index);
 
-                    StudentItemsAdd();
-                    GroupsItemsAdd();
-                    
-                        i++;
+                    FillStudentsList();
+                    FillGroupList();
+                    i++;
                 }
                 else
                     continue;
